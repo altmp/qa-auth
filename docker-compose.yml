@@ -20,4 +20,8 @@ services:
 
 networks:
   qa-auth:
-    external: true
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.32.0.0/16"
