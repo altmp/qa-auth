@@ -51,11 +51,13 @@ func main() {
 	cfSecurityToken = os.Getenv("CF_SECURITY_TOKEN")
 	discordClientID = os.Getenv("DISCORD_CLIENT_ID")
 	discordClientSecret = os.Getenv("DISCORD_CLIENT_SECRET")
+	host := os.Getenv("HTTP_HOST")
+	port := os.Getenv("HTTP_PORT")
 
 	http.HandleFunc("/auth", checkRoleHandler)
 
-	log.Println("Server started on http://localhost:5675")
-	log.Fatal(http.ListenAndServe(":5675", nil))
+	log.Println("Server started on http://" + host + ":" + port)
+	log.Fatal(http.ListenAndServe(host+":"+port, nil))
 }
 
 func checkRoleHandler(w http.ResponseWriter, r *http.Request) {

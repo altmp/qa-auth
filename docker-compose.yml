@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    environment:
+      DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN}"
+      DISCORD_CLIENT_ID: "${DISCORD_CLIENT_ID}"
+      DISCORD_CLIENT_SECRET: "${DISCORD_CLIENT_SECRET}"
+      DISCORD_GUILD_ID: "${DISCORD_GUILD_ID}"
+      DISCORD_QA_ROLES: "${DISCORD_QA_ROLES}"
+      CF_SECURITY_TOKEN: "${CF_SECURITY_TOKEN}"
+      HTTP_HOST: "${HTTP_HOST}"
+      HTTP_PORT: "${HTTP_PORT}"
