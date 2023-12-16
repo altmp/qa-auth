@@ -40,9 +40,7 @@ type response struct {
 }
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
+	godotenv.Load()
 
 	discordBotToken = os.Getenv("DISCORD_BOT_TOKEN")
 	guildID = os.Getenv("DISCORD_GUILD_ID")
