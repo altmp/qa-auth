@@ -15,7 +15,7 @@ services:
       HTTP_HOST: "${HTTP_HOST}"
       HTTP_PORT: "${HTTP_PORT}"
     networks:
-      cloud-auth:
+      qa-auth:
         ipv4_address: 172.32.0.3
 
 networks:
