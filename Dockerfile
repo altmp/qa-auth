@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Build the Go app
-RUN go build -o main .
+RUN go build -o qa-auth
 
 # Final Stage
 FROM alpine:latest  
@@ -16,7 +16,7 @@ FROM alpine:latest
 WORKDIR /root/
 
 # Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/main .
+COPY --from=builder /app/qa-auth .
 
 # Command to run the executable
-CMD ["./main"]
+CMD ["./qa-auth"]

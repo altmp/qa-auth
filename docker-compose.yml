@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     pull_policy: build
-    restart: "always"
+    # restart: "always"
     build: .
     environment:
       DISCORD_BOT_TOKEN: "${DISCORD_BOT_TOKEN}"
