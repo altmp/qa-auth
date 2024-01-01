@@ -45,9 +45,7 @@ func main() {
 
 	discordBotToken = os.Getenv("DISCORD_BOT_TOKEN")
 	guildsArr = strings.Split(os.Getenv("DISCORD_GUILDS"), ",")
-	fmt.Println(guildsArr)
 	rolesArr = strings.Split(os.Getenv("DISCORD_QA_ROLES"), ",")
-	fmt.Println(rolesArr)
 	cfSecurityToken = os.Getenv("CF_SECURITY_TOKEN")
 	discordClientID = os.Getenv("DISCORD_CLIENT_ID")
 	discordClientSecret = os.Getenv("DISCORD_CLIENT_SECRET")
@@ -83,7 +81,6 @@ func checkRoleHandler(w http.ResponseWriter, r *http.Request) {
 	hasRole := false
 	// Check if the user has the specified role in the guild
 	for _, guild := range guildsArr {
-		fmt.Println("Checking guild " + guild)
 		tmpHasRole, err := checkUserRole(user.ID, guild)
 		if err != nil {
 			http.Error(w, "Failed to check user role", http.StatusInternalServerError)
@@ -93,8 +90,6 @@ func checkRoleHandler(w http.ResponseWriter, r *http.Request) {
 			hasRole = true
 		}
 	}
-
-	fmt.Println(hasRole)
 
 	if !hasRole {
 		http.Error(w, "User does not have the required role", http.StatusForbidden)
