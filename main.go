@@ -81,6 +81,7 @@ func checkRoleHandler(w http.ResponseWriter, r *http.Request) {
 	hasRole := false
 	// Check if the user has the specified role in the guild
 	for _, guild := range guildsArr {
+		fmt.Println("Checking guild " + guild)
 		tmpHasRole, err := checkUserRole(user.ID, guild)
 		if err != nil {
 			http.Error(w, "Failed to check user role", http.StatusInternalServerError)
@@ -91,12 +92,12 @@ func checkRoleHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	fmt.Println(hasRole)
+
 	if !hasRole {
 		http.Error(w, "User does not have the required role", http.StatusForbidden)
 		return
 	}
-
-	fmt.Println(hasRole)
 
 	// Generate a random string
 	randomString := generateRandomString(32)
