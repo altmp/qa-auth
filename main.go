@@ -150,10 +150,6 @@ func exchangeCodeForToken(code string) (string, error) {
 	data.Set("client_id", clientID)
 	data.Set("client_secret", clientSecret)
 
-	fmt.Println(authCode)
-	fmt.Println(clientID)
-	fmt.Println(clientSecret)
-
 	// Create a new HTTP client
 	client := &http.Client{}
 
