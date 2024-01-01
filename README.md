@@ -22,7 +22,7 @@ The following environment variables need to be set for the service to function p
 - `DISCORD_BOT_TOKEN`: Your Discord bot token.
 - `DISCORD_CLIENT_ID`: Your Discord client ID.
 - `DISCORD_CLIENT_SECRET`: Your Discord client secret.
-- `DISCORD_GUILD_ID`: The guild ID of your Discord server.
+- `DISCORD_GUILDS`: Comma-separated list of Discord guild IDs.
 - `DISCORD_QA_ROLES`: Comma-separated list of Discord role IDs for authentication.
 - `CF_SECURITY_TOKEN`: Security token for Cloudflare CDN interactions.
 - `HTTP_HOST`: Host for the HTTP server (e.g., `0.0.0.0`).
