@@ -45,7 +45,9 @@ func main() {
 
 	discordBotToken = os.Getenv("DISCORD_BOT_TOKEN")
 	guildsArr = strings.Split(os.Getenv("DISCORD_GUILDS"), ",")
+	fmt.Println(guildsArr)
 	rolesArr = strings.Split(os.Getenv("DISCORD_QA_ROLES"), ",")
+	fmt.Println(rolesArr)
 	cfSecurityToken = os.Getenv("CF_SECURITY_TOKEN")
 	discordClientID = os.Getenv("DISCORD_CLIENT_ID")
 	discordClientSecret = os.Getenv("DISCORD_CLIENT_SECRET")
