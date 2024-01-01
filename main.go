@@ -23,6 +23,7 @@ var (
 )
 
 var rolesArr []string
+var guildsArr []string
 
 var (
 	postURL = "https://qa-cdn.altmp.workers.dev/new-token"
@@ -43,9 +44,8 @@ func main() {
 	godotenv.Load()
 
 	discordBotToken = os.Getenv("DISCORD_BOT_TOKEN")
-	guildID = os.Getenv("DISCORD_GUILD_ID")
-	rolesEnv := os.Getenv("DISCORD_QA_ROLES")
-	rolesArr = strings.Split(rolesEnv, ",")
+	guildsArr = strings.Split(os.Getenv("DISCORD_GUILDS"), ",")
+	rolesArr = strings.Split(os.Getenv("DISCORD_QA_ROLES"), ",")
 	cfSecurityToken = os.Getenv("CF_SECURITY_TOKEN")
 	discordClientID = os.Getenv("DISCORD_CLIENT_ID")
 	discordClientSecret = os.Getenv("DISCORD_CLIENT_SECRET")
@@ -78,11 +78,17 @@ func checkRoleHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	hasRole := false
 	// Check if the user has the specified role in the guild
-	hasRole, err := checkUserRole(user.ID)
-	if err != nil {
-		http.Error(w, "Failed to check user role", http.StatusInternalServerError)
-		return
+	for _, guild := range guildsArr {
+		tmpHasRole, err := checkUserRole(user.ID, guild)
+		if err != nil {
+			http.Error(w, "Failed to check user role", http.StatusInternalServerError)
+			return
+		}
+		if tmpHasRole {
+			hasRole = true
+		}
 	}
 
 	if !hasRole {
@@ -220,7 +226,7 @@ func getUserInfo(accessToken string) (*userInfo, error) {
 	return &user, nil
 }
 
-func checkUserRole(userID string) (bool, error) {
+func checkUserRole(userID string, guildID string) (bool, error) {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", fmt.Sprintf("https://discord.com/api/v10/guilds/%s/members/%s", guildID, userID), nil)
 	if err != nil {
